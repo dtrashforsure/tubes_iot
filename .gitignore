@@ -1,0 +1,40 @@
+# ========================
+# LaTeX build artifacts
+# ========================
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.synctex.gz
+*.toc
+*.pdf
+
+# ========================
+# Python
+# ========================
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv
+venv/
+
+# ========================
+# Sensitif — jangan pernah di-commit
+# ========================
+secrets.py
+config_secret.py
+.env
+*.key
+
+# ========================
+# OS & editor
+# ========================
+.DS_Store
+Thumbs.db
+.vscode/settings.json

@@ -1,0 +1,274 @@
+\documentclass[12pt,a4paper]{report}
+\PassOptionsToPackage{table}{xcolor}
+
+% ============================================================
+% TEMPLATE LAPORAN TUGAS BESAR
+% Mata Kuliah IoT Cerdas -- S2 Teknik Elektro
+% Diadaptasi dari template Buku TA S1 (Deco Aprilianis)
+% ============================================================
+
+% -------------------------
+% Paket utama
+% -------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{float}
+\usepackage{needspace}
+\usepackage{tocloft}
+\usepackage{pdfpages}
+\usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{indentfirst}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{cite}
+\usepackage{caption}
+\usepackage{notoccite}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,fit}
+\usepackage{times}
+\usepackage{setspace}
+\usepackage{sectsty}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\hypersetup{hidelinks, colorlinks=false, pdfborder={0 0 0}}
+\makeatletter
+\newcommand{\printtoccontents}{\@starttoc{toc}}
+\makeatother
+
+% -------------------------
+% Konfigurasi listings (source code)
+% -------------------------
+\lstdefinestyle{cstyle}{
+    language=C,
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\bfseries\color{blue!70!black},
+    commentstyle=\itshape\color{gray},
+    stringstyle=\color{orange!80!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    frame=single,
+    breaklines=true,
+    tabsize=2,
+    showstringspaces=false,
+    captionpos=b
+}
+\lstdefinestyle{pythonstyle}{
+    language=Python,
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\bfseries\color{blue!70!black},
+    commentstyle=\itshape\color{gray},
+    stringstyle=\color{orange!80!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    frame=single,
+    breaklines=true,
+    tabsize=4,
+    showstringspaces=false,
+    captionpos=b
+}
+
+% -------------------------
+% Metadata yang perlu diganti
+% -------------------------
+\newcommand{\JudulTA}{Sistem Monitoring Suhu Berbasis IoT Cerdas Menggunakan ESP32-S3, Sensor DS18B20, ThingSpeak, dan Random Forest Regressor}
+\newcommand{\JudulTAInggris}{Smart IoT-Based Temperature Monitoring System Using ESP32-S3, DS18B20 Sensor, ThingSpeak, and Random Forest Regressor}
+\newcommand{\NamaMahasiswa}{Deco Aprilianis}
+\newcommand{\NIMMahasiswa}{1102223137}
+\newcommand{\ProgramStudi}{S2 Teknik Elektro}
+\newcommand{\Kelas}{S2TE-42-RB1}
+\newcommand{\Fakultas}{Fakultas Teknik Elektro}
+\newcommand{\Universitas}{Universitas Telkom}
+\newcommand{\Kota}{Bandung}
+\newcommand{\TahunAkademik}{2026}
+\newcommand{\MataKuliah}{IoT Cerdas}
+\newcommand{\DosenPengampu}{Dr.Eng. Ir. Indra Chandra, S.Si., M.Si.}
+\newcommand{\NIPDosen}{[NIP Dosen]}
+\newcommand{\TanggalPengumpulan}{22 Juni 2026}
+
+% -------------------------
+% Format caption
+% -------------------------
+\captionsetup[figure]{name=Gambar,labelsep=space,justification=centering,singlelinecheck=false}
+\captionsetup[table]{name=Tabel,labelsep=space,justification=centering,singlelinecheck=false}
+\AtBeginDocument{%
+  \renewcommand{\tablename}{Tabel}%
+  \renewcommand{\figurename}{Gambar}%
+  \renewcommand{\lstlistingname}{Kode}%
+}
+
+% -------------------------
+% Format halaman dan spasi
+% -------------------------
+\geometry{
+    top=3cm,
+    bottom=3cm,
+    left=4cm,
+    right=3cm
+}
+\onehalfspacing
+\setlength{\emergencystretch}{2em}
+\setlength{\parindent}{1.25cm}
+
+% -------------------------
+% Format nomor BAB, section, tabel, gambar, persamaan
+% -------------------------
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% -------------------------
+% Format judul BAB dan subbab
+% -------------------------
+\chapterfont{\centering}
+\titleformat{\chapter}[display]
+  {\centering\fontsize{14pt}{16pt}\selectfont\bfseries}
+  {\MakeUppercase{BAB \thechapter}}
+  {0pt}
+  {\vspace{-0.5em}\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{-1cm}{1cm}
+
+\titleformat{\section}
+  {\fontsize{12pt}{14pt}\selectfont\bfseries}
+  {\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{1.0ex plus 0.2ex minus 0.1ex}{0.45ex plus 0.1ex}
+
+\titleformat{\subsection}
+  {\bfseries\fontsize{12pt}{14pt}\selectfont}
+  {\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{0.9ex plus 0.2ex minus 0.1ex}{0.35ex plus 0.1ex}
+
+\titleformat{\subsubsection}
+  {\bfseries\fontsize{12pt}{14pt}\selectfont}
+  {\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{0.8ex plus 0.2ex minus 0.1ex}{0.3ex plus 0.1ex}
+
+% -------------------------
+% Format daftar isi, daftar gambar, dan daftar tabel
+% -------------------------
+\setlength{\cftbeforefigskip}{0pt}
+\setlength{\cftbeforetabskip}{0pt}
+\setlength{\cftfigindent}{0pt}
+\setlength{\cfttabindent}{0pt}
+\setlength{\cftbeforetoctitleskip}{-1em}
+\setlength{\cftaftertoctitleskip}{1em}
+\setlength{\cftbeforeloftitleskip}{-1em}
+\setlength{\cftafterloftitleskip}{1em}
+\setlength{\cftbeforelottitleskip}{-1em}
+\setlength{\cftafterlottitleskip}{1em}
+\renewcommand{\addvspace}[1]{\vskip0pt}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchappresnum}{BAB~}
+\renewcommand{\cftchapaftersnum}{\space}
+\setlength{\cftchapindent}{0pt}
+\setlength{\cftchapnumwidth}{3.7em}
+\setlength{\cftsecindent}{1.5em}
+\setlength{\cftsecnumwidth}{2.2em}
+\setlength{\cftsubsecindent}{2.8em}
+\setlength{\cftsubsecnumwidth}{3em}
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftchappagefont}{\bfseries}
+\renewcommand{\cftdot}{.}
+\renewcommand{\cftdotsep}{1}
+\setlength{\cftbeforechapskip}{1ex}
+\setlength{\cftbeforesecskip}{0pt}
+\renewcommand{\cftfigpresnum}{{Gambar~}}
+\renewcommand{\cftfigaftersnum}{\space}
+\setlength{\cftfignumwidth}{5.5em}
+\renewcommand{\cfttabpresnum}{{Tabel~}}
+\renewcommand{\cfttabaftersnum}{\space}
+\setlength{\cfttabnumwidth}{4.5em}
+
+% -------------------------
+% Helper tabel
+% -------------------------
+\newcommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\begin{document}
+
+\onehalfspacing
+\pagenumbering{roman}
+\thispagestyle{empty}
+
+\input{bagian_awal/cover}
+\input{bagian_awal/abstrak}
+\input{bagian_awal/abstract}
+
+% ============================================================
+% DAFTAR ISI, GAMBAR, TABEL (otomatis LaTeX)
+% ============================================================
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{DAFTAR ISI}
+\begin{center}
+    {\fontsize{14pt}{16pt}\selectfont\textbf{\MakeUppercase{Daftar Isi}}}
+\end{center}
+\vspace{1em}
+\printtoccontents
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{DAFTAR GAMBAR}
+\renewcommand{\listfigurename}{\hfill\fontsize{14pt}{16pt}\selectfont\textbf{\MakeUppercase{Daftar Gambar}}\hfill}
+\listoffigures
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{DAFTAR TABEL}
+\renewcommand{\listtablename}{\hfill\fontsize{14pt}{16pt}\selectfont\textbf{\MakeUppercase{Daftar Tabel}}\hfill}
+\listoftables
+
+% ============================================================
+% ISI UTAMA
+% ============================================================
+\newpage
+\pagenumbering{arabic}
+
+\input{bab/bab1}
+\input{bab/bab2}
+\input{bab/bab3}
+\input{bab/bab4}
+\input{bab/bab5}
+
+% ============================================================
+% DAFTAR PUSTAKA
+% ============================================================
+\renewcommand{\bibname}{DAFTAR PUSTAKA}
+\phantomsection
+\addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+% ============================================================
+% LAMPIRAN
+% ============================================================
+\appendix
+\chapter*{LAMPIRAN}
+\phantomsection
+\addcontentsline{toc}{chapter}{LAMPIRAN}
+
+\input{lampiran/lampiran_a}
+\input{lampiran/lampiran_b}
+
+\end{document}
